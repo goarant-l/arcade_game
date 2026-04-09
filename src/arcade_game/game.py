@@ -57,8 +57,23 @@ class Game:
 
         # deplacement du vaisseau
         self.spaceship.update()
+        print(len(self.spaceship.shoots))
+
         for shoot in self.spaceship.shoots:
           shoot.update()
+        self.update_shoots()
+
+    def update_shoots(self):
+        visible_shoots = []
+        for shoot in self.spaceship.shoots:
+          if shoot.y > -shoot.h :
+            visible_shoots.append(shoot)
+        self.spaceship.shoots = visible_shoots
+
+
+          
+
+
 
     # =====================================================
     # == DRAW (30FPS)
@@ -70,8 +85,14 @@ class Game:
         pyxel.cls(0)
 
         
+        
         for shoot in self.spaceship.shoots:
           shoot.draw()
         self.spaceship.draw()
+
+
+
+
+        
 # instanciation de notre classe
 Game()
